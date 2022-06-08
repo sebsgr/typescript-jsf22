@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "esnext",
-
-    "outDir": "dist/"
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitAny": true,
+    "allowUnreachableCode": false
   }
 }
