@@ -1,0 +1,37 @@
+<section data-timing="60">
+    <h2>Generics</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            function log<T>(arg: T): T {
+                console.log(arg);
+                return arg;
+            }
+            
+            type Colorful = { color: string }
+
+            function logColor<T extends Colorful>(colorful: T) {
+                console.log(colorful.color);
+            }
+            
+            class ReadOnlyArray<T> {
+                constructor(private innerArray: T[]) { }
+            
+                public getAtIndex(index : number): T{
+                    return this.innerArray[index];
+                }
+            }
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=3-1_generics.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=3-1_generics.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Generics</h2>
+        Hier sollen alle Basis Funktionalitäten von Generics mit einer Funktion und Klasse gezeigt werden.
+    </aside>
+</section>

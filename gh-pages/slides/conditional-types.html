@@ -1,0 +1,51 @@
+<section data-timing="120">
+    <h2>Conditional Types</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Foo<T> = T extends string ? number : boolean;
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=5-1_conditional-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=5-1_conditional-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Conditional Types</h2>
+    </aside>
+</section>
+
+<section data-timing="180">
+    <h2>Conditional Types - Type Inferring</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Flatten<T> = Type extends Array<infer I> ? I : T;
+            declare var t1: Flatten<number[]>;  // number
+            declare var t2: Flatten<number>;    // number
+            
+            type FullFlatten<T> = Type extends Array<infer I> ? FullFlatten<I> : T;
+            declare var t3: FullFlatten<number[][][][]>;  // number
+            
+            type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : never;
+            declare var foo: ReturnType<() => string>;    // string
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=5-2_conditional-types-infer.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=5-2_conditional-types-infer.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Conditional Types - Type Inferring</h2>
+        <pre><code class="typescript" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Flatten<T> = Type extends Array<infer I> ? I : T;
+            type ReturnType<T extends () => any> = T extends () => infer R ? R : never;
+        </script></code></pre>
+    </aside>
+</section>

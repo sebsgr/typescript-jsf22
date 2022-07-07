@@ -1,0 +1,11 @@
+.print .hide-on-print{
+    display: none;
+}
+
+:not(.print) .show-on-print{
+    display: none;
+}
+
+.print .show-on-print{
+    display: initial;
+}

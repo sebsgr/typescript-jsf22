@@ -1,0 +1,20 @@
+
+
+div.reveal.slide {
+ max-width: 100%;   
+}
+
+div.reveal.slide div.slides {
+ display: none;   
+}
+
+div.reveal.slide div.speaker-notes {
+ position: unset;
+ width: 100%;    
+ height: 100%;   
+}
+
+.reveal.show-notes {
+    max-height: 100% !important;
+    max-width: 100% !important;
+}

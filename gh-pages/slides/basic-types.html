@@ -1,0 +1,384 @@
+<section data-timing="90">
+    <h2>Typen</h2>
+    <div class="container">
+        <div class="row fragment" style="margin-bottom: 2rem;">
+            <div class="col" style="font-weight: bold;"> boolean </div>
+            <div class="col" style="font-weight: bold;"> number </div>
+            <div class="col" style="font-weight: bold;"> string </div>
+        </div>
+        <div class="row fragment" style="margin-bottom: 2rem;">
+            <div class="col" style="font-weight: bold; color: red;"> enum </div>
+            <div class="col" style="font-weight: bold;"> object </div>
+            <div class="col" style="font-weight: bold;"> Function </div>
+        </div>
+        <div class="row fragment" style="margin-bottom: 2rem;">
+            <div class="col" style="font-weight: bold;"> Array </div>
+            <div class="col" style="font-weight: bold;"> Tuple </div>
+            <div class="col"></div>
+        </div>
+        <div class="row fragment" style="margin-bottom: 2rem;">
+            <div class="col" style="font-weight: bold;"> null </div>
+            <div class="col" style="font-weight: bold;"> undefined </div>
+            <div class="col"></div>
+        </div>
+        <div class="row fragment" style="margin-bottom: 2rem;">
+            <hr>
+            <div class="col" style="font-weight: bold; color: red;"> any </div>
+            <div class="col" style="font-weight: bold; color: red;"> unknown </div>
+            <div class="col" style="font-weight: bold; color: red;"> never </div>
+            <div class="col" style="font-weight: bold; color: red;"> void </div>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h2>Typen</h2>
+        <p>any: Stellt quasi keine Typisierung dar (Kann alles sein), any kann man alles zuweißen</p>
+        <p>unknown: Stellt das "Gegenteil" zu any dar. Alles kan unknown zugewießen werden, unknown kann aber nur
+            unknown und any zugewießen werden. </p>
+        <p>never: Bezeichnet einen Wert, der nicht vorkommen kann.</p>
+        <p>void: Bezeichnet einen Wert ohne Daten. Kann nur undefined (oder null bei strictNullChecks=false) annehmen.
+        </p>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>Typen</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            let foo: unknown = "";
+            let bar: any = foo;
+            
+            foo = 1;                   // OK
+            let s1: string = foo;      // Error
+            let s2: string = bar;      // OK
+            
+            let v1: void = null;       // Abhängig von Compiler Option "strictNullChecks"
+            let v2: void = undefined;  // OK
+            
+            function keepProcessing(): never {
+                while (true) {
+                    console.log('Infinity Loop');
+                }
+            }
+
+            keepProcessing();
+            keepProcessing(); // Unreachable code detected. (Compiler Option: allowUnreachableCode=false)
+            
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-1_types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-1_types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Typen Demo</h2>
+        <p>any: Stellt quasi keine Typisierung dar (Kann alles sein), any kann man alles zuweißen</p>
+        <p>unknown: Stellt das "Gegenteil" zu any dar. Alles kan unknown zugewießen werden, unknown kann aber nur
+            unknown und any zugewießen werden. </p>
+        <p>never: Bezeichnet einen Wert, der nicht vorkommen kann.</p>
+        <p>void: Bezeichnet einen Wert ohne Daten. Kann nur undefined (oder null bei strictNullChecks=false) annehmen.
+        </p>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>Type Inference</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript   r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            let x = 3;                                      // x: number
+
+            function bar(n: number, s: string) {            // bar(n: number, s: string): boolean
+                return false;
+            }
+            
+            class Foo {
+                doSomething() { }                           // doSomething() : void
+            }
+            let foo = new Foo();                            // foo: Foo
+            foo.doSomething();
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-2_type-inference.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-2_type-inference.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Type Inference</h2>
+        <p> Alle Typdefinitionen können entfernt werden</p>
+    </aside>
+</section>
+
+<section data-timing="60">
+    <h2>Object Types</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            var point: {x: number; y: number;};
+            
+            function foo(point: {x: number; y: number;}) { }
+
+            function bar(): {x: number; y: number;}{ }
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-3_object-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-3_object-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Object Types</h2>
+        <p>Type Inference bei Methoden Return</p>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>Type Aliases</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Test = string
+
+            type Point = { x: number, y: number };
+
+            type Cat = { meow: () => void };
+
+            type StringPropertyGetter = (obj: any) => string;
+
+            function printStringProperty(obj: any, getter: StringPropertyGetter) {
+                console.log(getter(obj))
+            }
+
+            printStringProperty({ name: "Peter" }, obj => obj.peter)
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-4_type-alias.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-4_type-alias.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Type Aliases</h2>
+        <p> type StringPropertyGetter = (obj: any) => string;</p>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>Property Modifiers</h2>
+    <p class="small">Optional | Readonly</p>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Point = {
+                x: number;
+                y: number;
+                z?: number;
+                readonly color: string
+                readonly name?: string
+            };
+
+            const point : Point = {x: 5, y: 10, color: "red", name: "P1" };
+            point.z;            // Returns: undefined
+            point.name = "P2";  // Error: Cannot assign to 'name' because it is a read-only property
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-5_property-modifiers.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-5_property-modifiers.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Property Modifiers</h2>
+        <pre><code class="typescript" data-trim data-noescape data-line-numbers><script type="text/template">
+            const point : Point = {x: 5, y: 10, color: "red", name: "P1" };
+            point.z;            // Returns: undefined
+            point.name = "P2";  // Error: Cannot assign to 'name' because it is a read-only Property
+        </script></code></pre>
+    </aside>
+</section>
+
+<section data-timing="120">
+    <h2>Union Types</h2>
+    <p class="small">OR Verknüpfung von Typen</p>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+                    declare const foo: number | string;
+
+                    foo.length;            // Error
+                    foo.toExponential();   // Error
+                    
+                    foo.toLocaleString();
+                    
+                </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-6_union-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-6_union-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Union Types</h2>
+        <pre><code class="typescript" data-trim data-noescape data-line-numbers><script type="text/template">
+            if (typeof foo === "number") {
+                foo.toExponential();
+            } else {
+                foo.length;
+            }
+        </script></code></pre>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>Type Predicates</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+                    type Square = { a: number };
+                    type Circle = { radius: number };
+                    type Shape = Square | Circle;
+
+                    function isSquare(shape: Shape): shape is Square {
+                        return ...;
+                    }
+
+                    declare const shape: Shape;
+
+                    if (isSquare(shape)) {
+                        shape.a;
+                    } else {
+                        shape.radius;
+                    }
+                </script></code></pre>
+
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-7_type-predicates.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-7_type-predicates.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Type Predicates</h2>
+        <pre><code class="typescript" data-trim data-noescape data-line-numbers><script type="text/template">
+            function isSquare(shape: Shape): shape is Square {
+                return typeof ((shape as Square).a) === 'number';
+            }
+            
+        </script></code></pre>
+    </aside>
+</section>
+
+<section data-timing="60">
+    <h2>Intersection Types</h2>
+    <p class="small">AND Verknüpfung von Typen</p>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type Colorful = { color: string };
+            type Circle = { radius: number };
+            
+            type ColorfulCircle = Colorful & Circle;
+            
+            const t: ColorfulCircle = {
+                color: "red",
+                radius: 4
+            }
+            </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-8_intersection-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-8_intersection-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Intersection Types</h2>
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            const t: ColorfulCircle = {
+                color: "red",
+                radius: 4
+            }
+        </script></code></pre>
+    </aside>
+</section>
+
+<section data-timing="90">
+    <h2>String/Number Literal Types</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type PrimeNumber = 2 | 3 | 5 | 7 | 11 | 13 | 17 | 19;
+    
+            type pets = "Dog" | "Cat" | "Horse";
+            
+            type Yes = "yes" | "y" | 1 | true;
+            type No = "no" | "n" | 0 | false;
+            
+            type YesOrNo = Yes | No;
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-9_literal-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=2-9_literal-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>String/Number Literal Types</h2>
+    </aside>
+</section>
+
+
+
+<section data-timing="60">
+    <h2>Nullable Types</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            // required strictNullChecks=true
+    
+            let s = "foo";
+            s = null;                       // error, 'null' is not assignable to 'string'
+    
+            let sn: string | null = "bar";
+            sn = null;                      // ok
+            sn = undefined;                 // error, 'undefined' is not assignable to 'string | null'
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?file=2-11_strict-null.ts&hideDevTools=1&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?embed=0&file=2-11_strict-null.ts&hideDevTools=1&view=editor&hideExplorer=1">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Nullable Types</h2>
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            notNullableString = null;
+            nullableString = null;
+        </script></code></pre>
+
+
+    </aside>
+</section>

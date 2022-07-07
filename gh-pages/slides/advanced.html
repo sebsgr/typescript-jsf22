@@ -1,0 +1,30 @@
+<section data-timing="180">
+    <h2>Advanced</h2>
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            type FirstParam<T extends (first: any, ...other: any) => any> = T extends (first: infer P, ...other: any) => any ? P : never
+
+            type SecondParam<T extends (first: any, second: any, ...other: any) => any> = T extends (first: any, second: infer P, ...other: any) => any ? P : never
+            
+            declare function f1(obj: string, arg: { a: number; b: string }): string;
+            
+            declare function f2(obj: string, arg: { c: boolean; d: string }): number;
+            
+            function f(obj: FirstParam<typeof f1> & FirstParam<typeof f2>, arg: SecondParam<typeof f1> & SecondParam<typeof f2>): [ReturnType<typeof f1>, ReturnType<typeof f2>] {
+                return [f1(obj, arg), f2(obj, arg)];
+            }
+            
+            const [foo1, foo2] = f("demo", { a: 4, b: "", c: true, d: "bar" }); // [string, number]
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=6-1_combine-functions.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=6-1_combine-functions.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+    </aside>
+</section>

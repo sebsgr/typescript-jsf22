@@ -1,0 +1,76 @@
+<section data-timing="180">
+    <h2>Mapped types</h2>
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape><script type="text/template">
+            type Person = {
+                readonly id: number,
+                name: string,
+                age: number,
+                city?: string
+            };
+            
+            type OptionalPerson = {
+                [P in keyof Person]?: Person[P];
+            }
+            
+            type StringPerson = {
+                [P in keyof Person]: string;
+            }
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=4-1_mapped-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=4-1_mapped-types.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Mapped types</h2>
+        <pre><code class="typescript r-stretch" data-trim data-noescape><script type="text/template">
+            type OptionalPerson = {
+                [P in keyof Person]?: Person[P];
+            }
+            
+            type StringPerson = {
+                [P in keyof Person]: string;
+            }
+        </script></code></pre>
+    </aside>
+</section>
+
+<section  data-timing="90">
+    <h2>Vorhandene Mapped Types</h2>
+
+    <div class="row r-stretch">
+        <div class="col-5">
+            <pre><code class="typescript" data-trim data-noescape><script type="text/template">
+                type Partial<T> = {
+                    [P in keyof T]?: T[P];
+                }
+            </script></code></pre>
+            <pre><code class="typescript" data-trim data-noescape><script type="text/template">
+                type Required<T> = {
+                    [P in keyof T]-?: T[P];
+                }
+            </script></code></pre>
+            <pre><code class="typescript" data-trim data-noescape><script type="text/template">
+                type Readonly<T> = {
+                    readonly  [P in keyof T]: T[P];
+                }
+            </script></code></pre>
+        </div>
+        <div class="col-7">
+            <a class="show-on-print" target="_blank"
+                href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=4-2_mapped-types-existing.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+                on StackBlitz ⚡️</a>
+            <iframe class="hide-on-print stackblitz"
+                data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=4-2_mapped-types-existing.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+            </iframe>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h2>Vorhandene Mapped Types</h2>
+    </aside>
+</section>

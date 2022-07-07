@@ -1,0 +1,184 @@
+<section data-timing="90">
+    <h2>Typescript (TS)</h2>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li>2012 von Microsoft veröffentlicht</li>
+                <li>OpenSource auf GitHub</li>
+                <li>veröffentlicht unter der Apache-Lizenz</li>
+            </ul>
+        </div>
+        <div class="col">
+            <img style="height: 30vh;" src="img/typescript_logo.png">
+        </div>
+
+    </div>
+
+    <aside class="notes">
+        <p>Typescript (TS)</p>
+        <p>Microsoft will in Frontend Entwicklung stark beteiligt sein.</p>
+
+    </aside>
+</section>
+
+<section data-timing="120">
+    <h2>Typescript (TS)</h2>
+    <h4>Features</h4>
+
+    <ul>
+        <li>Transpiliert TS Code zu JS</li>
+        <li>statische Typisierung mit Checks zur Compilezeit</li>
+        <li>Transpiliert in verschiede ECMA Script Versionen</li>
+        <li>Objektorientierte Sprache</li>
+        <li>Unterstützt alle JS Bibliotheken</li>
+        <li>Superset von ECMA Script <br> &#8594 valider JS Code ist valider TS Code</li>
+    </ul>
+
+    <aside class="notes">
+        <h2>Typescript (TS)</h2>
+        <h4>Features</h4>
+    </aside>
+</section>
+
+<section data-timing="60">
+    <h2>Und warum das Ganze?</h2>
+
+
+    <div class="show-on-print">
+        <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+            Array(8).join('foo' - 1) + ' Batman!';
+
+            // NaNNaNNaNNaNNaNNaNNaN Batman!
+        </script></code></pre>
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=demo1.js&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=demo1.js&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Und warum das Ganze?</h2>
+        <p>
+            'foo' validiert zu 'NaN'. Ew wird kein Fehler geworfen.
+        </p>
+    </aside>
+</section>
+
+<section data-timing="30">
+    <img data-src="img/stateofjs-statistic.jpg">
+    <aside class="notes">
+        <h2>Bild Statistik</h2>
+    </aside>
+</section>
+
+<section data-timing="60">
+    <h2>Typescript installieren</h2>
+    <span>via NPM installieren (-g => global)</span>
+    <pre><code class="bash" data-trim data-noescape data-line-numbers>
+        npm install -g typescript
+    </code></pre>
+
+    <div class="show-on-print">
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=index.js&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=index.js&hideExplorer=1&hideNavigation=1&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Typescript installieren</h2>
+    </aside>
+</section>
+
+
+<section data-timing="120">
+    <h2>Typescript File transpilieren</h2>
+
+    <pre class="show-on-print"><code class="typescript r-stretch" data-trim data-noescape data-line-numbers>
+        // Filename: demo2.ts
+
+        const hello: string = "Hello World";
+        console.log(hello);
+    </code></pre>
+
+    <pre><code class="bash" data-trim data-noescape data-line-numbers>
+        tsc demo2.ts
+    </code></pre>
+
+    <pre class="show-on-print"><code class="javascript" data-trim data-noescape data-line-numbers>
+        // Filename: helloWorld.js
+
+        var hello = "Hello World";
+        console.log(hello);
+    </code></pre>
+
+
+    <div class="show-on-print">
+        <a target="_blank"
+            href="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=demo2.ts&hideExplorer=0&hideNavigation=0&theme=light&view=editor">Try
+            on StackBlitz ⚡️</a>
+    </div>
+    <iframe class="hide-on-print stackblitz r-stretch"
+        data-src="https://stackblitz.com/edit/typescript-jfs22-js?embed=1&file=demo2.ts&hideExplorer=0&hideNavigation=0&theme=light&view=editor">
+    </iframe>
+
+    <aside class="notes">
+        <h2>Typescript File transpilieren</h2>
+        <p>tsc -t es2022 demo3.ts</p>
+    </aside>
+</section>
+
+<section data-timing="120">
+    <h2>Duck-Typing</h2>
+
+    <div class="row">
+        <div class="col">
+            <blockquote>
+                When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird
+                a duck.
+            </blockquote>
+        </div>
+        <div class="col">
+            <div class="show-on-print">
+                <pre><code class="typescript r-stretch" data-trim data-noescape data-line-numbers><script type="text/template">
+                    class Duck {
+                        sound = "quack";
+                        swim() { console.log("Duck Swim!"); }
+                    }
+                    class Pinguin {
+                        sound = "...";
+                        swim() { console.log("Pinguin Swim!"); }
+                    }
+                    class Eagle {
+                        sound = "...";
+                    }
+                    
+                    let duck2: Duck = new Pinguin();
+                    let duck3: Duck = new Eagle();  // Error
+                    console.log(duck2.swim());  // "Pinguin Swim!"
+                </script></code></pre>
+                <a target="_blank"
+                    href="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=1-1_duck-typing.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor">Try
+                    on StackBlitz ⚡️</a>
+            </div>
+            <iframe class="hide-on-print stackblitz r-stretch"
+                data-src="https://stackblitz.com/edit/typescript-jfs22?ctl=0&embed=1&file=1-1_duck-typing.ts&hideExplorer=1&hideNavigation=1&theme=light&view=editor"
+                height="550px">
+            </iframe>
+        </div>
+    </div>
+
+    <aside class="notes">
+        <h2>Duck-Typing</h2>
+        <p>
+            Wenn ich einen Vogel sehe, der wie eine Ente läuft, wie eine Ente schwimmt und wie eine Ente schnattert,
+            dann nenne ich diesen Vogel eine Ente
+        </p>
+    </aside>
+</section>

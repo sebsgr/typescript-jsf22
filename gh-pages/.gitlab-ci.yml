@@ -1,0 +1,93 @@
+stages:
+  - pdf-export
+  - pdf-export-with-notes
+  - pdf-export-with-fragments
+  - pdf-export-only-notes
+  - pdf-export-ipad
+  - deploy
+
+.pdf-export:
+  stage: pdf
+  image: 
+    name: astefanutti/decktape
+    entrypoint: [""]
+  script:
+    - cd $CI_PROJECT_DIR/
+    - rm -rf screenshots && mkdir screenshots
+    - node /decktape/decktape.js reveal --chrome-path chromium-browser --chrome-arg=--no-sandbox --chrome-arg=--disable-web-security --size=$SIZE --screenshots $DECKTAPE_PARAMS http://apache/$REVEAL_PARAMS $FILENAME
+
+# docker rm -f my-apache-app && docker run -dit --name my-apache-app -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4 && sleep 2 && docker run --rm --link my-apache-app --entrypoint "" -v "$PWD":/opt/tmp -w /opt/tmp  astefanutti/decktape node /decktape/decktape.js reveal --chrome-path chromium-browser --chrome-arg=--no-sandbox --chrome-arg=--disable-web-security --size=1920x1080 --screenshots http://my-apache-app/?print=true export.pdf
+
+# docker rm -f my-apache-app && docker run -dit --name my-apache-app -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4 && sleep 2 && docker run --rm --link my-apache-app --entrypoint "" -v "$PWD":/opt/tmp -w /opt/tmp  astefanutti/decktape node /decktape/decktape.js reveal --chrome-path chromium-browser --chrome-arg=--no-sandbox --chrome-arg=--disable-web-security --size=650x488 http://my-apache-app/?print=true&showNotes=only-notes export.pdf
+
+  services:
+    - webdevops/apache-dev
+    - name: webdevops/apache-dev
+      alias: apache      
+      
+  variables:
+    WEB_DOCUMENT_ROOT: $CI_PROJECT_DIR
+    SIZE: 1920x1080
+    FILENAME: export.pdf
+
+  artifacts:
+    name: export
+    paths:
+        - $FILENAME
+        - screenshots
+    expire_in: 1 day
+
+pdf-export:
+  extends: .pdf-export 
+  stage: pdf-export
+  variables:
+    FILENAME: export.pdf
+    REVEAL_PARAMS: "?print=true"
+
+pdf-export-with-notes:
+  extends: .pdf-export
+  stage: pdf-export-with-notes
+  variables:
+    FILENAME: export-with-notes.pdf
+    REVEAL_PARAMS: "?print=true&showNotes=true"
+
+pdf-export-with-fragments:
+  extends: .pdf-export
+  stage: pdf-export-with-fragments
+  variables:
+    FILENAME: export-with-fragments.pdf
+    REVEAL_PARAMS: "?print=true&fragments=true"
+
+pdf-export-only-notes:
+  extends: .pdf-export
+  stage: pdf-export-only-notes
+  variables:
+    FILENAME: export-only-notes.pdf
+    REVEAL_PARAMS: "?print=true&showNotes=only-notes"
+
+pdf-export-ipad:
+  extends: .pdf-export
+  stage: pdf-export-ipad
+  variables:
+    FILENAME: export-ipad.pdf
+    REVEAL_PARAMS: "?print=true&showNotes=only-notes"
+    SIZE: 650x488
+    
+pages:
+  stage: deploy
+  dependencies:
+    - pdf-export
+    - pdf-export-with-notes
+    - pdf-export-with-fragments
+    - pdf-export-only-notes
+    - pdf-export-ipad
+  script:
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+

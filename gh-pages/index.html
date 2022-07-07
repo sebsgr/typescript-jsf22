@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title></title>
+
+	<link rel="stylesheet" href="reveal-js/dist/reset.css">
+	<link rel="stylesheet" href="reveal-js/dist/reveal.css">
+	<link rel="stylesheet" href="aformatik/css/bootstrap.min.css">
+
+	<!-- Standard aformatik Theme-->
+	<link rel="stylesheet" href="reveal-js/dist/theme/sky.css" id="theme">
+	<link rel="stylesheet" href="aformatik/css/aformatik.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="aformatik/plugin/aformatik/print/print.css">
+
+	<!-- Sollte weitere CSS Code benötigt werden, diesen bitte in ein/mehrere eigene/s File/s legen z.B. dist/custom.css-->
+	<!-- <link rel="stylesheet" href="css/custom.css"> -->
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="reveal-js/plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+	<!-- aformatik Background - START -->
+	<span class="aformatik-logo"><img src="aformatik/img/aformatik.png" alt=""></span>
+	<span class="aformatik-a">a</span>
+	<!-- aformatik Background - END -->
+
+	<div class="reveal">
+		<div class="slides">
+			<section data-external="slides/title.html"> </section>
+			<!-- <section data-external="slides/starke-typen.html"> </section> -->
+			<section data-external="slides/typescript.html"> </section>
+			<section data-external="slides/basic-types.html"> </section>
+			<section data-external="slides/generic.html"> </section>
+			<section data-external="slides/mapped-types.html"> </section>
+			<section data-external="slides/conditional-types.html"> </section>
+			<!-- <section data-external="slides/advanced.html"> </section> -->
+			<section data-external="slides/end.html"> </section>
+			<section data-external="slides/title.html"> </section>
+			<!-- Add more slides here -->
+		</div>
+	</div>
+
+
+	<script src="aformatik/js/jquery.min.js"></script>
+	<script src="aformatik/js/bootstrap.min.js"></script>
+	<script src="reveal-js/dist/reveal.js"></script>
+	<script src="reveal-js/plugin/notes/notes.js"></script>
+	<script src="reveal-js/plugin/markdown/markdown.js"></script>
+	<script src="reveal-js/plugin/highlight/highlight.js"></script>
+
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+
+		Reveal.initialize({
+			width: "80%",
+			hash: true,
+			center: false,
+			defaultTiming: 60,
+			slideNumber: true,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			dependencies: [
+				{ src: 'aformatik/plugin/external/external.js', condition: function () { return !!document.querySelector('[data-external]'); } },
+				{ src: 'aformatik/plugin/aformatik/only-notes-view/only-notes-view.js' },
+				{ src: 'aformatik/plugin/aformatik/print/print.js' },
+				{ src: 'aformatik/plugin/aformatik/timing-to-notes/timing-to-notes.js' }
+
+			]
+		});
+	</script>
+</body>
+
+</html>
